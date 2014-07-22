@@ -22,14 +22,18 @@ int main(void)
 	i2c_set_address_(0x5E);                 //- 8-bit address
 	i2c_enable_gc_();
 	
-	audiohw_init();
+	//i2c_write(0xF0, 1);
 	
-	audiohw_postinit();
+	//audiohw_init();
+	
+	//audiohw_postinit();
 	
 	sei();   
 	
     while(1)
     {
-        //TODO:: Please write your application code 
+        audiohw_init();
+		audiohw_postinit();
+		_delay_ms(1000);
     }
 }
