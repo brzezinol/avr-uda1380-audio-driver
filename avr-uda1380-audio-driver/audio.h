@@ -15,7 +15,8 @@
 #define AUDIO_GAIN_LINEIN       0
 #define AUDIO_GAIN_MIC          1
 
-
-
+#ifdef _AUDIOHW_H_
+#include "audiohw.h"
+#endif
 
 #endif /* AUDIO_H_ */
