@@ -9,6 +9,8 @@
 #ifndef AUDIO_H_
 #define AUDIO_H_
 
+#define HAVE_UDA1380
+#define HAVE_RECORDING
 #define AUDIO_GAIN_LINEIN       0
 #define AUDIO_GAIN_MIC          1
 
