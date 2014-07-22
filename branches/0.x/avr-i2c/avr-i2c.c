@@ -15,7 +15,7 @@
 volatile uint8_t * I2cDataPtr;
 volatile I2CSTAT_T I2cStatus;
 volatile uint8_t I2cNumByte;    //-Holds the # of bytes in the I2C data struct/array
-//volatile rbuff_t I2cTxBuff;     //-(slave-mode) Data to be sent on master request 
+volatile rbuff_t I2cTxBuff;     //-(slave-mode) Data to be sent on master request 
 volatile rbuff_t I2cRxBuff;     //-(slave-mode) Data to be read from master
 
 /*================================================================*

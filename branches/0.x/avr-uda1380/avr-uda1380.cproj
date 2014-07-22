@@ -80,6 +80,12 @@
       <Value>DEBUG</Value>
     </ListValues>
   </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>../../avr-uda1380-audio-driver</Value>
+      <Value>../../avr-i2c</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
   <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
   <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
@@ -100,6 +106,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\avr-i2c\avr-i2c.cproj">
+      <Name>avr-i2c</Name>
+      <Project>{299cd662-edbc-463d-b71f-a864daba9309}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\avr-uda1380-audio-driver\avr-uda1380-audio-driver.cproj">
       <Name>avr-uda1380-audio-driver</Name>
       <Project>{ff84f6ba-5eef-4588-9d83-e35ae30c64e7}</Project>

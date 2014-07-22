@@ -20,6 +20,8 @@
  ****************************************************************************/
 #include <avr/io.h>
 #include <stdbool.h>
+#include "avr-i2c.h"
+#include "rbuff.h"
 
 #ifndef _AUDIOHW_H_
 #define _AUDIOHW_H_
