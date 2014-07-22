@@ -112,10 +112,11 @@ static int uda1380_write_reg(unsigned char reg, unsigned short value)
     data[2] = value & 0xff;
 
     //if (i2c_write(I2C_IFACE_0, UDA1380_ADDR, data, 3) != 3)
-    //{
+	if(i2c_write(data, sizeof data) != I2C_OK)
+    {
         //DEBUGF("uda1380 error reg=0x%x", reg);
-        //return -1;
-    //} 
+        return -1;
+    } 
 
     uda1380_regs[reg] = value;
 
@@ -260,7 +261,7 @@ void audiohw_init(void)
     recgain_mic = 0;
     recgain_line = 0;
 
-    reset();
+    //reset();
 
     if (audiohw_set_regs() == -1)
     {
@@ -274,6 +275,7 @@ void audiohw_postinit(void)
     /* Sleep a while so the power can stabilize (especially a long
        delay is needed for the line out connector). */
     //sleep(HZ);
+	_delay_ms(50);
     /* Power on FSDAC and HP amp. */
     audiohw_enable_output(true);
 
@@ -293,7 +295,7 @@ void audiohw_close(void)
     /* First enable mute and sleep a while */
     uda1380_write_reg(REG_MUTE, MUTE_MASTER);
     //sleep(HZ/8);
-
+	_delay_ms(25);
     /* Then power off the rest of the chip */
     uda1380_write_reg(REG_PWR, 0);
     uda1380_write_reg(REG_0, 0);    /* Disable codec    */
@@ -333,7 +335,7 @@ void audiohw_enable_recording(bool source_mic)
     }
 
     //sleep(HZ/8);
-
+	_delay_ms(25);
     uda1380_write_reg(REG_I2S,     uda1380_regs[REG_I2S] | I2S_MODE_MASTER);
     uda1380_write_reg(REG_MIX_CTL, MIX_MODE(1)); 
 }
@@ -346,7 +348,7 @@ void audiohw_disable_recording(void)
     uda1380_write_reg(REG_PGA, MUTE_ADC);
 	//tu jakieœ opóŸnienie nie wie mczemu :) 100 Hz / 8 ale trzeba przerobiæ na _delay_us
     //sleep(HZ/8);
-    
+    _delay_ms(25);
     uda1380_write_reg(REG_I2S, I2S_IFMT_IIS);
 
     uda1380_regs[REG_PWR] &= ~(PON_LNA | PON_ADCL | PON_ADCR |
@@ -426,14 +428,15 @@ void audiohw_set_recvol(int left, int right, int type)
 
 ///TODO:Po przypiêciu biblioteki i2c przerobic poni¿szy kod
                 //if (i2c_write(I2C_IFACE_0, UDA1380_ADDR, data, 5) != 5)
-                //{
-                    //DEBUGF("uda1380 error reg=combi rec gain");
-                //}
-                //else
-                //{
-                    //uda1380_regs[REG_DEC_VOL] = value_dec;
-                    //uda1380_regs[REG_PGA] = value_pga;
-                //}
+				if(i2c_write(data, sizeof data) != I2C_OK)
+                {
+	                //DEBUGF("uda1380 error reg=combi rec gain");
+                }
+                else
+                {
+	                uda1380_regs[REG_DEC_VOL] = value_dec;
+	                uda1380_regs[REG_PGA] = value_pga;
+                }
             }
             else
             {
