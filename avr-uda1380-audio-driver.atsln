@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "avr-uda1380-audio-driver", "avr-uda1380-audio-driver\avr-uda1380-audio-driver.cproj", "{FF84F6BA-5EEF-4588-9D83-E35AE30C64E7}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "avr-i2c", "avr-i2c\avr-i2c.cproj", "{299CD662-EDBC-463D-B71F-A864DABA9309}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "avr-uda1380", "avr-uda1380\avr-uda1380.cproj", "{1D53F75C-D722-438C-8482-0D77E09F6337}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF84F6BA-5EEF-4588-9D83-E35AE30C64E7}.Debug|AVR.ActiveCfg = Debug|AVR
+		{FF84F6BA-5EEF-4588-9D83-E35AE30C64E7}.Debug|AVR.Build.0 = Debug|AVR
+		{FF84F6BA-5EEF-4588-9D83-E35AE30C64E7}.Release|AVR.ActiveCfg = Release|AVR
+		{FF84F6BA-5EEF-4588-9D83-E35AE30C64E7}.Release|AVR.Build.0 = Release|AVR
+		{299CD662-EDBC-463D-B71F-A864DABA9309}.Debug|AVR.ActiveCfg = Debug|AVR
+		{299CD662-EDBC-463D-B71F-A864DABA9309}.Debug|AVR.Build.0 = Debug|AVR
+		{299CD662-EDBC-463D-B71F-A864DABA9309}.Release|AVR.ActiveCfg = Release|AVR
+		{299CD662-EDBC-463D-B71F-A864DABA9309}.Release|AVR.Build.0 = Release|AVR
+		{1D53F75C-D722-438C-8482-0D77E09F6337}.Debug|AVR.ActiveCfg = Debug|AVR
+		{1D53F75C-D722-438C-8482-0D77E09F6337}.Debug|AVR.Build.0 = Debug|AVR
+		{1D53F75C-D722-438C-8482-0D77E09F6337}.Release|AVR.ActiveCfg = Release|AVR
+		{1D53F75C-D722-438C-8482-0D77E09F6337}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
