@@ -32,15 +32,26 @@ int main(void)
 	
 	//audiohw_postinit();
 	
-	sei();   
+	sei(); 
+	
+	i2c_data_t packet;
+	
+	packet.addr = 0x30; //adres uda
+	packet.reg = 0x00; //adres rejestru
+	packet.data = 0x11; //dana
 	
     while(1)
     {
-		USART_Log("Audio init");
-        audiohw_init();
-		USART_Log("Audio postinit");
-		audiohw_postinit();
-		USART_Log("Delay...1s");
+		//USART_Log("Audio init");
+        //audiohw_init();
+		//USART_Log("Audio postinit");
+		//audiohw_postinit();
+		//USART_Log("Delay...1s");
+		i2c_write(&packet, sizeof(i2c_data_t));
+		_delay_ms(1000);
+		_delay_ms(1000);
+		_delay_ms(1000);
+		_delay_ms(1000);
 		_delay_ms(1000);
     }
 }
