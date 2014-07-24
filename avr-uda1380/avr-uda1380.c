@@ -19,28 +19,30 @@ int main(void)
 	DDRC |= 0b00110000; //port C  pins 4,5 as out
 	PORTC |= 0b00110000; // enable pullups on 4,5 pins
 	USART_Init();
-	USART_Log("Init i2c");
+	USART_Log("Init i2c\r");
 	i2c_init_(0x45);                        //- F_TWI=100KHz
 	//ring_buff_init (&I2cRxBuff,I2cRxRing);  //- Slave-mode RX/TX
-	USART_Log("Set i2c self address 0x5E");
+	USART_Log("Set i2c self address 0x5E\r");
 	i2c_set_address_(0x5E);                 //- 8-bit address
-	i2c_enable_gc_();
-	
-	//i2c_write(0xF0, 1);
-	
-	//audiohw_init();
-	
-	//audiohw_postinit();
-	
-	sei();   
+	//i2c_enable_gc_();						//enable global call
 	
     while(1)
     {
-		USART_Log("Audio init");
+		USART_Log("Audio init\r");
         audiohw_init();
-		USART_Log("Audio postinit");
+		USART_Log("Audio postinit\r");
 		audiohw_postinit();
-		USART_Log("Delay...1s");
+		USART_Log("Delay\r");
+		USART_SendStr("5");
 		_delay_ms(1000);
+		USART_SendStr("4");
+		_delay_ms(1000);
+		USART_SendStr("3");
+		_delay_ms(1000);
+		USART_SendStr("2");
+		_delay_ms(1000);
+		USART_SendStr("1");
+		_delay_ms(1000);
+		USART_SendStr(MSG_CR);
     }
 }
