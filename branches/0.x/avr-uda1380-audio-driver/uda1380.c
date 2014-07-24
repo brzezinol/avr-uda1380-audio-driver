@@ -79,7 +79,7 @@ short recgain_line;
 /* Definition of a playback configuration to start with */
 #define NUM_DEFAULT_REGS 13
 unsigned short uda1380_defaults[2*NUM_DEFAULT_REGS] = {
-	REG_0,          EN_DAC | EN_INT | EN_DEC | ADC_CLK | DAC_CLK | SYSCLK_256FS | WSPLL_25_50,
+	REG_0,          EN_DAC | EN_INT | EN_DEC | ADC_CLK | DAC_CLK | SYSCLK_512FS | WSPLL_25_50,
 	REG_I2S,        I2S_IFMT_IIS,
 	REG_PWR,        PON_PLL | PON_BIAS,
 	/* PON_HP & PON_DAC is enabled later */

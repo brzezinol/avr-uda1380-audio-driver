@@ -5,7 +5,11 @@ Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "avr-uda1380-audio-driver", 
 EndProject
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "avr-i2c", "avr-i2c\avr-i2c.cproj", "{299CD662-EDBC-463D-B71F-A864DABA9309}"
 EndProject
-Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "avr-uda1380", "avr-uda1380\avr-uda1380.cproj", "{1D53F75C-D722-438C-8482-0D77E09F6337}"
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "avr-uda1380-app", "avr-uda1380\avr-uda1380-app.cproj", "{1D53F75C-D722-438C-8482-0D77E09F6337}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "avr-common", "avr-common\avr-common.cproj", "{2131010C-9C16-4192-A4E5-D2B5B100EC9F}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "avr-usart", "avr-usart\avr-usart.cproj", "{278935C5-F16F-43BD-BD4F-4C90D23DB847}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +29,14 @@ Global
 		{1D53F75C-D722-438C-8482-0D77E09F6337}.Debug|AVR.Build.0 = Debug|AVR
 		{1D53F75C-D722-438C-8482-0D77E09F6337}.Release|AVR.ActiveCfg = Release|AVR
 		{1D53F75C-D722-438C-8482-0D77E09F6337}.Release|AVR.Build.0 = Release|AVR
+		{2131010C-9C16-4192-A4E5-D2B5B100EC9F}.Debug|AVR.ActiveCfg = Debug|AVR
+		{2131010C-9C16-4192-A4E5-D2B5B100EC9F}.Debug|AVR.Build.0 = Debug|AVR
+		{2131010C-9C16-4192-A4E5-D2B5B100EC9F}.Release|AVR.ActiveCfg = Release|AVR
+		{2131010C-9C16-4192-A4E5-D2B5B100EC9F}.Release|AVR.Build.0 = Release|AVR
+		{278935C5-F16F-43BD-BD4F-4C90D23DB847}.Debug|AVR.ActiveCfg = Debug|AVR
+		{278935C5-F16F-43BD-BD4F-4C90D23DB847}.Debug|AVR.Build.0 = Debug|AVR
+		{278935C5-F16F-43BD-BD4F-4C90D23DB847}.Release|AVR.ActiveCfg = Release|AVR
+		{278935C5-F16F-43BD-BD4F-4C90D23DB847}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
