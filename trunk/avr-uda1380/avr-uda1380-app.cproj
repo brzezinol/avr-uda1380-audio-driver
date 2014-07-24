@@ -13,31 +13,45 @@
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
     <AssemblyName>avr-uda1380</AssemblyName>
-    <Name>avr-uda1380</Name>
+    <Name>avr-uda1380-app</Name>
     <RootNamespace>avr-uda1380</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
     <CacheFlash>true</CacheFlash>
     <ProgFlashFromRam>true</ProgFlashFromRam>
-    <RamSnippetAddress />
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
     <UncachedRange />
-    <OverrideVtorValue />
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
     <BootSegment>2</BootSegment>
-    <eraseonlaunchrule>1</eraseonlaunchrule>
+    <eraseonlaunchrule>0</eraseonlaunchrule>
     <AsfFrameworkConfig>
       <framework-data xmlns="">
-  <options />
-  <configurations />
-  <files />
-  <documentation help="" />
-  <offline-documentation help="" />
-  <dependencies>
-    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.18.1" />
-  </dependencies>
-</framework-data>
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.18.1" />
+        </dependencies>
+      </framework-data>
     </AsfFrameworkConfig>
-    <avrtool />
+    <avrtool>com.atmel.avrdbg.tool.simulator</avrtool>
+    <com_atmel_avrdbg_tool_simulator>
+      <ToolOptions xmlns="">
+        <InterfaceProperties>
+          <JtagEnableExtResetOnStartSession>false</JtagEnableExtResetOnStartSession>
+        </InterfaceProperties>
+        <InterfaceName>
+        </InterfaceName>
+      </ToolOptions>
+      <ToolType xmlns="">com.atmel.avrdbg.tool.simulator</ToolType>
+      <ToolNumber xmlns="">
+      </ToolNumber>
+      <ToolName xmlns="">Simulator</ToolName>
+    </com_atmel_avrdbg_tool_simulator>
+    <UseGdb>False</UseGdb>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -83,8 +97,10 @@
   </avrgcc.compiler.symbols.DefSymbols>
   <avrgcc.compiler.directories.IncludePaths>
     <ListValues>
-      <Value>../../avr-uda1380-audio-driver</Value>
+      <Value>../../avr-common</Value>
       <Value>../../avr-i2c</Value>
+      <Value>../../avr-usart</Value>
+      <Value>../../avr-uda1380-audio-driver</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -107,6 +123,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\avr-common\avr-common.cproj">
+      <Name>avr-common</Name>
+      <Project>{2131010c-9c16-4192-a4e5-d2b5b100ec9f}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\avr-i2c\avr-i2c.cproj">
       <Name>avr-i2c</Name>
       <Project>{299cd662-edbc-463d-b71f-a864daba9309}</Project>
@@ -115,6 +136,11 @@
     <ProjectReference Include="..\avr-uda1380-audio-driver\avr-uda1380-audio-driver.cproj">
       <Name>avr-uda1380-audio-driver</Name>
       <Project>{ff84f6ba-5eef-4588-9d83-e35ae30c64e7}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\avr-usart\avr-usart.cproj">
+      <Name>avr-usart</Name>
+      <Project>{278935c5-f16f-43bd-bd4f-4c90d23db847}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>

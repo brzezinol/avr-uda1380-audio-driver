@@ -5,8 +5,7 @@
 #ifndef AVRI2C_H
 #define AVRI2C_H
 
-#define F_CPU 16000000UL
-#define F_TWI 100000UL
+#include "avr-common.h"
 
 #include <avr/io.h>
 #include <stdint.h>
@@ -59,6 +58,7 @@
 enum I2C_STATUS_ENUM
 {
     I2C_OK,               ///< Transaction completed succesfully
+	I2C_NOACK,			  ///< Transaction failed no ACK
     I2C_ERROR,            ///< Transaction failed
     I2C_BUSY,             ///< Transaction in progress
     I2C_TIMEOUT  = 0x04,  ///< Transaction failed
