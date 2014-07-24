@@ -37,27 +37,9 @@
 #define UART_USEINTERRUPT 1
 #endif
 
-#define TXT_CR 0x0D
-#define TXT_LF 0x0A
-
 volatile unsigned char UART_value;  
 volatile unsigned char UART_buffer[16];
 extern volatile uint8_t UART_buffer_position;
-
-const char MSG_init[6];
-const char MSG_ok[4];
-const char MSG_ovf[5];
-const char MSG_ukn[6];
-const char MSG_addr[4];
-const char MSG_loc[4];
-const char MSG_rmt[4];
-const char MSG_rx[6];
-const char MSG_i2cerr[8];
-
-const char CMD_GET_REG_1FFC[7];
-const char CMD_LVL_ON[5];
-const char CMD_LVL_OFF[6];
-
 
 void USART_Init(void);
 void USART_SendByte(uint8_t u8Data);

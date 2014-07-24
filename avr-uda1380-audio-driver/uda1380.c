@@ -79,7 +79,7 @@ short recgain_line;
 /* Definition of a playback configuration to start with */
 #define NUM_DEFAULT_REGS 13
 unsigned short uda1380_defaults[2*NUM_DEFAULT_REGS] = {
-	REG_0,          EN_DAC | EN_INT | EN_DEC | ADC_CLK | DAC_CLK | SYSCLK_512FS | WSPLL_25_50,
+	REG_0,          EN_DAC | EN_ADC | EN_INT | EN_DEC | ADC_CLK | DAC_CLK | SYSCLK_512FS | WSPLL_25_50,
 	REG_I2S,        I2S_IFMT_IIS,
 	REG_PWR,        PON_PLL | PON_BIAS,
 	/* PON_HP & PON_DAC is enabled later */
@@ -105,16 +105,31 @@ unsigned short uda1380_defaults[2*NUM_DEFAULT_REGS] = {
 /* Returns 0 if register was written or -1 if write failed */
 static int uda1380_write_reg(unsigned char reg, unsigned short value)
 {
-    unsigned char data[3];
+	i2c_data2_t packet;
+	packet.addr = UDA1380_ADDR; //adres uda
+	packet.reg = reg; //adres rejestru
+	packet.datah = value >> 8; //dana
+	packet.datal = value & 0xff;
+	
+	#ifdef DEBUG
+	USART_SendStr("WRITE PACKET ADR:");
+	USART_SendByte(packet.addr);
+	USART_SendStr(" REG:");
+	USART_SendByte(packet.reg);
+	USART_SendStr(" DATAH:");
+	USART_SendByte(packet.datah);
+	USART_SendStr(" DATAL:");
+	USART_SendByte(packet.datal);
+	USART_SendStr(MSG_CR);
+	#endif // DEBUG
 
-    data[0] = reg;
-    data[1] = value >> 8;
-    data[2] = value & 0xff;
-
-    //if (i2c_write(I2C_IFACE_0, UDA1380_ADDR, data, 3) != 3)
-	if(i2c_write(data, sizeof data) != I2C_OK)
+	if(i2c_write(&packet, sizeof(i2c_data_t)) != I2C_OK)
     {
-        //DEBUGF("uda1380 error reg=0x%x", reg);
+		#ifdef DEBUG
+		USART_SendStr("WRITE PACKET ERROR\r");
+		USART_SendByte(I2cStatus);
+		_delay_ms(5000);
+		#endif // DEBUG
         return -1;
     } 
 

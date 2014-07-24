@@ -38,7 +38,7 @@
 
 //uart
 #ifndef USART_BAUDRATE
- #define USART_BAUDRATE 19200
+ #define USART_BAUDRATE 57600
 #endif
 
 #ifndef UART_USEINTERRUPT
@@ -46,6 +46,7 @@
 #endif
 
 ////uart codes
+#define MSG_CR "\r\0"
 //extern const char MSG_init[6] = {"INIT\r\0"};
 //extern const char MSG_ok[4] = {"OK\r\0"};
 //extern const char MSG_ovf[5] = {"OVF\r\0"};
