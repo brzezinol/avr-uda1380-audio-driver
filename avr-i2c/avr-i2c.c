@@ -73,12 +73,13 @@ ISR(TWI_vect)
 //-DATA BYTE TRANSMITTED - NO ACK RECEIVED
     else if (status == 0x30)
     {
-        I2cStatus = I2C_ERROR;      //-status of operation is ERROR
+        I2cStatus = I2C_NOACK;      //-status of operation is noack
         i2c_stop_tx_();             //-no response.
     }
 //-Arbitration lost
     else if (status == 0x38)
     { 
+		I2cStatus = I2C_LOST_ARB;
         i2c_stop_tx_();     //-Release bus
         //I2CON &= 0x65;    //-Retry when bus is free (STA=1)
     }
@@ -97,7 +98,7 @@ ISR(TWI_vect)
     else if (status == 0x48)
     {   //-Device may be too busy to respond or is not there
         i2c_stop_tx_();
-        I2cStatus = I2C_ERROR;      //-status of operation is ERROR
+        I2cStatus = I2C_NOACK;      //-status of operation is ERROR
     }
 //-DATA BYTE RECEIVED - ACK TRANSMITTED
     else if (status == 0x50)
