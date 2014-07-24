@@ -123,7 +123,7 @@ static int uda1380_write_reg(unsigned char reg, unsigned short value)
 	USART_SendStr(MSG_CR);
 	#endif // DEBUG
 
-	if(i2c_write(&packet, sizeof(i2c_data_t)) != I2C_OK)
+	if(i2c_write(&packet, sizeof(i2c_data2_t)) != I2C_OK)
     {
 		#ifdef DEBUG
 		USART_SendStr("WRITE PACKET ERROR\r");
