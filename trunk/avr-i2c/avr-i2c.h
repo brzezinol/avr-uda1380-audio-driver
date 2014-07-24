@@ -25,8 +25,8 @@
 #define I2C_PS64_MIN_F_TWI  (F_CPU/32656)
 #define I2C_BR_PS64         (-(16*F_TWI - F_CPU)/(128*F_TWI))
 #if F_CPU > (F_TWI * 16)
-# if F_TWI > I2C_PS1_MIN_F_TWI //if greater then required min then use PS1
-#  define I2C_BIT_RATE  I2C_BR_PS1
+# if F_TWI > I2C_PS1_MIN_F_TWI //if greater then required min then use PS1 100000 > 30418
+#  define I2C_BIT_RATE  I2C_BR_PS1 //72
 #  define I2C_PRESCALER 0
 # elif F_TWI > I2C_PS4_MIN_F_TWI
 #  define I2C_BIT_RATE  I2C_BR_PS4
@@ -138,7 +138,15 @@ struct i2c_data_struct_t
     uint8_t reg;  ///< Register of slave device to access
     uint8_t data; ///< Data to write in register
 };
+struct i2c_data2_struct_t
+{
+	uint8_t addr; ///< I2C address to write to
+	uint8_t reg;  ///< Register of slave device to access
+	uint8_t datah; ///< Data to write in register
+	uint8_t datal; ///< Data to write in register
+};
 typedef struct i2c_data_struct_t i2c_data_t;
+typedef struct i2c_data2_struct_t i2c_data2_t;
 
 /*
  *  Global functions and variables
