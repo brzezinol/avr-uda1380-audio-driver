@@ -6,6 +6,7 @@
  */ 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <stdbool.h>
 #include "avr-common.h"
 #include "avr-i2c.h"
 #include "rbuff.h"
@@ -32,6 +33,9 @@ int main(void)
         audiohw_init();
 		USART_Log("Audio postinit\r");
 		audiohw_postinit();
+		USART_Log("Enable rec\r");
+		audiohw_enable_recording(false);
+		
 		USART_Log("Delay\r");
 		USART_SendStr("5");
 		_delay_ms(1000);
