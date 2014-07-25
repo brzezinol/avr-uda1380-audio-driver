@@ -6,4 +6,10 @@
  */ 
 
 #include <avr/io.h>
+#include "avr-common.h"
 
+short* ByteToHexString(uint8_t b){
+	char *str = (char *) malloc(sizeof(char) * 2);
+	itoa(b,str,16);
+	return str;
+}
