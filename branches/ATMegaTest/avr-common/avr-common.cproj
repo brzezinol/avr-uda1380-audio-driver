@@ -5,7 +5,7 @@
     <ProjectVersion>6.1</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.C</ToolchainName>
     <ProjectGuid>{2131010c-9c16-4192-a4e5-d2b5b100ec9f}</ProjectGuid>
-    <avrdevice>ATmega328P</avrdevice>
+    <avrdevice>ATmega32</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>StaticLibrary</OutputType>
     <Language>C</Language>

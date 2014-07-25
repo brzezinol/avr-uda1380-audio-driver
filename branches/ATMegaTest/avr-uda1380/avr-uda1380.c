@@ -26,12 +26,21 @@ int main(void)
 	i2c_set_address_(0x5E);                 //- 8-bit address
 	//i2c_enable_gc_();						//enable global call
 	
+	i2c_data2_t packet;
+	packet.addr = 0x30;
+	packet.reg = 0x01;
+	packet.datah = 0xF0;
+	packet.datal = 0x0F;
+	
     while(1)
     {
-		USART_Log("Audio init\r");
-        audiohw_init();
-		USART_Log("Audio postinit\r");
-		audiohw_postinit();
+		i2c_write(&packet, sizeof(packet));
+		
+		
+		//USART_Log("Audio init\r");
+        //audiohw_init();
+		//USART_Log("Audio postinit\r");
+		//audiohw_postinit();
 		USART_Log("Delay\r");
 		USART_SendStr("5");
 		_delay_ms(1000);
