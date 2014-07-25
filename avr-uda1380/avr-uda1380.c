@@ -12,12 +12,12 @@
 #include "audio.h"
 #include "USART.h"
 
-uint8_t I2cRxRing[I2C_RX_RING_BUFFER_SIZE] = {0x55,0xAA,0x55};
-
+uint8_t I2cRxRing[I2C_RX_RING_BUFFER_SIZE] = {0x55,0xAA,0x55};//to tylko dla trybu slave
+	
 int main(void)
 {
-	DDRC |= 0b00110000; //port C  pins 4,5 as out
-	PORTC |= 0b00110000; // enable pullups on 4,5 pins
+	DDRC = ((1<<SDA_PIN)|(1<<SCL_PIN)); //port C  pins SDA_PIN,SCL_PIN as out
+	PORTC = ((1<<SDA_PIN)|(1<<SCL_PIN)); // enable pullups on SDA_PIN,SCL_PIN pins
 	USART_Init();
 	USART_Log("Init i2c\r");
 	i2c_init_(0x45);                        //- F_TWI=100KHz

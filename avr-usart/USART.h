@@ -10,7 +10,7 @@
 #ifndef USART_H_
 #define USART_H_
 
-#if defined (__AVR_ATmega328P__) || defined (__AVR_ATmega328__)
+#if defined (_AVR_IOM328P_H_)
   #define UBRRL UBRR0L
   #define UBRRH UBRR0H
   #define UCSRA UCSR0A
