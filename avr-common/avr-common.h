@@ -4,7 +4,7 @@
  * Created: 2014-04-19 19:40:54
  *  Author: MeinFuhrer
  */ 
-
+#include <stdint.h>
 
 #ifndef COMMON_H_
 #define COMMON_H_
@@ -76,5 +76,7 @@
 
 #define SET_PINPORT_AS_OUT(ADDRES,PIN) (ADDRES |= (1<<PIN))
 #define SET_PINPORT_AS_IN(ADDRES,PIN) (ADDRES &= ~(1<<PIN))
+
+extern short* ByteToHexString(uint8_t b);
 
 #endif /* COMMON_H_ */

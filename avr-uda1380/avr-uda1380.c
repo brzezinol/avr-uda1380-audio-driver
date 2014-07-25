@@ -6,6 +6,7 @@
  */ 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <stdbool.h>
 #include "avr-common.h"
 #include "avr-i2c.h"
 #include "rbuff.h"

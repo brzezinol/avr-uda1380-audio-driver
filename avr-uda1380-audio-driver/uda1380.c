@@ -113,13 +113,13 @@ static int uda1380_write_reg(unsigned char reg, unsigned short value)
 	
 	#ifdef DEBUG
 	USART_SendStr("WRITE PACKET ADR:");
-	USART_SendByte(packet.addr);
+	USART_SendByte(ByteToHexString(packet.addr));
 	USART_SendStr(" REG:");
-	USART_SendByte(packet.reg);
+	USART_SendByte(ByteToHexString(packet.reg));
 	USART_SendStr(" DATAH:");
-	USART_SendByte(packet.datah);
+	USART_SendByte(ByteToHexString(packet.datah));
 	USART_SendStr(" DATAL:");
-	USART_SendByte(packet.datal);
+	USART_SendByte(ByteToHexString(packet.datal));
 	USART_SendStr(MSG_CR);
 	#endif // DEBUG
 
@@ -127,7 +127,7 @@ static int uda1380_write_reg(unsigned char reg, unsigned short value)
     {
 		#ifdef DEBUG
 		USART_SendStr("WRITE PACKET ERROR\r");
-		USART_SendByte(I2cStatus);
+		USART_SendByte(ByteToHexString(I2cStatus));
 		_delay_ms(5000);
 		#endif // DEBUG
         return -1;
