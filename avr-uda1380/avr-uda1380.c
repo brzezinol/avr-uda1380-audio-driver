@@ -30,12 +30,14 @@ int main(void)
     while(1)
     {
 		USART_Log("Audio init\r");
-        audiohw_init();
+		audiohw_init();
 		USART_Log("Audio postinit\r");
 		audiohw_postinit();
 		USART_Log("Enable rec\r");
-		audiohw_enable_recording(false);
-		
+		audiohw_enable_recording(true);
+		USART_Log("Rec vol\r");
+		audiohw_set_recvol(50,50,AUDIO_GAIN_MIC);
+		//USART_SendStr(ByteToHexString(PORTC));
 		USART_Log("Delay\r");
 		USART_SendStr("5");
 		_delay_ms(1000);
