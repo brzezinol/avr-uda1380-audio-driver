@@ -47,10 +47,17 @@ int main(void)
 	//USART_Log("Init i2c\r");
 	//i2c_init_(0x45);                        //- F_TWI=100KHz
 	SoftI2CInit();	
-	inituda();
+
+	
+	
+	//audiohw_set_regs();
 	
     while(1)
     {
+		inituda();
+		for(int i = 0; i < 10;i++){
+				_delay_ms(500);
+		}
 		//_delay_ms(500);
 		//uint8_t cmd = 0;
 		//cmd = USART_ReceiveByte();

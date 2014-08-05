@@ -203,6 +203,7 @@ static int audiohw_set_regs(void)
 
         if (uda1380_write_reg(reg, value) == -1)
             return -1;
+			_delay_us(500);
     }
 
     return 0;
