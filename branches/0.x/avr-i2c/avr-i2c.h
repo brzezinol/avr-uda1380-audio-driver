@@ -145,8 +145,20 @@ struct i2c_data2_struct_t
 	uint8_t datah; ///< Data to write in register
 	uint8_t datal; ///< Data to write in register
 };
+struct i2c_data4_struct_t
+{
+	uint8_t addr; ///< I2C address to write to
+	uint8_t reg;  ///< Register of slave device to access
+	uint8_t datah; ///< Data to write in register
+	uint8_t datal; ///< Data to write in register
+	uint8_t data2h; ///< Data to write in register
+	uint8_t data2l; ///< Data to write in register
+};
+
+
 typedef struct i2c_data_struct_t i2c_data_t;
 typedef struct i2c_data2_struct_t i2c_data2_t;
+typedef struct i2c_data4_struct_t i2c_data4_t;
 
 /*
  *  Global functions and variables

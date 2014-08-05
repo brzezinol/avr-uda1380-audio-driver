@@ -79,6 +79,8 @@
 
 #define MIN(X,Y) ((X) < (Y) ? (X) : (Y))
 #define MAX(X,Y) ((X) > (Y) ? (X) : (Y))
+/* return number of elements in array a */
+#define ARRAYLEN(a) (sizeof(a)/sizeof((a)[0]))
 
 extern short* ByteToHexString(uint8_t b);
 
