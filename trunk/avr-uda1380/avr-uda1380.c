@@ -13,40 +13,50 @@
 #include "audio.h"
 #include "USART.h"
 
-uint8_t I2cRxRing[I2C_RX_RING_BUFFER_SIZE] = {0x55,0xAA,0x55};//to tylko dla trybu slave
+//uint8_t I2cRxRing[I2C_RX_RING_BUFFER_SIZE] = {0x55,0xAA,0x55};//to tylko dla trybu slave
+	
+void inituda(){
+	USART_Log("Audio init\r");
+	audiohw_init();
+	USART_Log("Disable output\r");
+	audiohw_enable_output(false);
+	USART_Log("Set fs\r");
+	audiohw_set_frequency(2);
+	USART_Log("Rec vol\r");
+	audiohw_set_recvol(0,0,AUDIO_GAIN_MIC);
+	USART_Log("Master vol\r");
+	audiohw_set_master_vol(0,0);
+	USART_Log("Mixer vol\r");
+	audiohw_set_mixer_vol(0,0);
+	USART_Log("Set monitor\r");
+	audiohw_set_monitor(true);
+	USART_Log("Enable rec\r");
+	audiohw_enable_recording(true);
+	USART_Log("Mute false\r");
+	audiohw_mute(false);
+}
 	
 int main(void)
 {
-	DDRC = ((1<<SDA_PIN)|(1<<SCL_PIN)); //port C  pins SDA_PIN,SCL_PIN as out
-	PORTC = ((1<<SDA_PIN)|(1<<SCL_PIN)); // enable pullups on SDA_PIN,SCL_PIN pins
+	DDRC = ((1<<SDA_PIN)|(1<<SCL_PIN)); 
+	PORTC = ((1<<SDA_PIN)|(1<<SCL_PIN)); 
+	_delay_ms(500);
 	USART_Init();
 	USART_Log("Init i2c\r");
 	i2c_init_(0x45);                        //- F_TWI=100KHz
-	//ring_buff_init (&I2cRxBuff,I2cRxRing);  //- Slave-mode RX/TX
-	USART_Log("Set i2c self address 0x5E\r");
-	i2c_set_address_(0x5E);                 //- 8-bit address
-	//i2c_enable_gc_();						//enable global call
+	
+	inituda();
 	
     while(1)
     {
-		USART_Log("Audio init\r");
-        audiohw_init();
-		USART_Log("Audio postinit\r");
-		audiohw_postinit();
-		USART_Log("Enable rec\r");
-		audiohw_enable_recording(false);
-		
-		USART_Log("Delay\r");
-		USART_SendStr("5");
-		_delay_ms(1000);
-		USART_SendStr("4");
-		_delay_ms(1000);
-		USART_SendStr("3");
-		_delay_ms(1000);
-		USART_SendStr("2");
-		_delay_ms(1000);
-		USART_SendStr("1");
-		_delay_ms(1000);
-		USART_SendStr(MSG_CR);
+		//_delay_ms(500);
+		//uint8_t cmd = 0;
+		//cmd = USART_ReceiveByte();
+		//if(cmd != 0)
+		//{
+			//USART_Log("Byte recv\r");
+			//USART_SendByte(cmd);
+		//}
+			
     }
 }
