@@ -23,7 +23,7 @@
 #include "avr-common.h"
 #include "audio.h"
 #include "audiohw.h"
-
+#include <util/delay.h>
 #ifndef _UDA1380_H
 #error Hardware not defined
 #endif
@@ -80,8 +80,8 @@ short recgain_line;
 /* Definition of a playback configuration to start with */
 #define NUM_DEFAULT_REGS 13
 unsigned short uda1380_defaults[2*NUM_DEFAULT_REGS] = {
-	REG_0,          EN_DAC | EN_ADC | EN_INT | EN_DEC | ADC_CLK | DAC_CLK | SYSCLK_512FS | WSPLL_25_50,
-	REG_I2S,        I2S_IFMT_IIS,
+	REG_0,          EN_ADC | EN_DEC | ADC_CLK | SYSCLK_256FS,
+	REG_I2S,        I2S_MODE_MASTER | I2S_OFMT_IIS,
 	REG_PWR,        PON_PLL | PON_BIAS,
 	/* PON_HP & PON_DAC is enabled later */
 	REG_AMIX,       AMIX_RIGHT(0x3f) | AMIX_LEFT(0x3f),
@@ -112,27 +112,29 @@ static int uda1380_write_reg(unsigned char reg, unsigned short value)
 	packet.datah = value >> 8; //dana
 	packet.datal = value & 0xff;
 	
-	#ifdef DEBUG
-	USART_SendStr("WRITE PACKET ADR:");
-	USART_SendStr(ByteToHexString(packet.addr));
-	USART_SendStr(" REG:");
-	USART_SendStr(ByteToHexString(packet.reg));
-	USART_SendStr(" DATAH:");
-	USART_SendStr(ByteToHexString(packet.datah));
-	USART_SendStr(" DATAL:");
-	USART_SendStr(ByteToHexString(packet.datal));
-	USART_SendStr(MSG_CR);
-	#endif // DEBUG
+	//#ifdef DEBUG
+	//USART_SendStr("WRITE PACKET ADR:");
+	//USART_SendStr(ByteToHexString(packet.addr));
+	//USART_SendStr(" REG:");
+	//USART_SendStr(ByteToHexString(packet.reg));
+	//USART_SendStr(" DATAH:");
+	//USART_SendStr(ByteToHexString(packet.datah));
+	//USART_SendStr(" DATAL:");
+	//USART_SendStr(ByteToHexString(packet.datal));
+	//USART_SendStr(MSG_CR);
+	//#endif // DEBUG
 
-	if(i2c_write(&packet, sizeof(i2c_data2_t)) != I2C_OK)
-    {
-		#ifdef DEBUG
-		USART_SendStr("WRITE PACKET ERROR\r");
-		USART_SendStr(ByteToHexString(I2cStatus));
-		_delay_ms(5000);
-		#endif // DEBUG
-        return -1;
-    } 
+	SoftI2CWritePacket(&packet, sizeof(i2c_data2_t));
+
+	//if(i2c_write(&packet, sizeof(i2c_data2_t)) != I2C_OK)
+    //{
+		////#ifdef DEBUG
+		////USART_SendStr("WRITE PACKET ERROR\r");
+		////USART_SendStr(ByteToHexString(I2cStatus));
+		////_delay_ms(5000);
+		////#endif // DEBUG
+        //return -1;
+    //} 
 
     uda1380_regs[reg] = value;
 
@@ -450,17 +452,18 @@ void audiohw_set_recvol(int left, int right, int type)
 				packet.data2h = value_pga >> 8;
 				packet.data2l = value_pga & 0xff;
 
+				SoftI2CWritePacket(&packet, sizeof(packet));
                 //if (i2c_write(I2C_IFACE_0, UDA1380_ADDR, data, 5) != 5)
-				if(i2c_write(&packet, sizeof(packet)) != I2C_OK)
-                {
-					USART_Log("uda1380 error reg=combi rec gain\r");
-	                //DEBUGF("uda1380 error reg=combi rec gain");
-                }
-                else
-                {
+				//if(i2c_write(&packet, sizeof(packet)) != I2C_OK)
+                //{
+					//USART_Log("uda1380 error reg=combi rec gain\r");
+	                ////DEBUGF("uda1380 error reg=combi rec gain");
+                //}
+                //else
+                //{
 	                uda1380_regs[REG_DEC_VOL] = value_dec;
 	                uda1380_regs[REG_PGA] = value_pga;
-                }
+                //}
             }
             else
             {

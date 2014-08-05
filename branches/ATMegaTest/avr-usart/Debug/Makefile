@@ -66,7 +66,7 @@ ADDITIONAL_DEPENDENCIES:=
 OUTPUT_FILE_DEP:= ./makedep.mk
 
 LIB_DEP+=  \
-D:/dev/avr-uda1380-audio-driver/branches/0.x/avr-common/Debug/libavr-common.a
+D:/dev/avr-uda1380-audio-driver/branches/ATMegaTest/avr-common/Debug/libavr-common.a
 
 # AVR32/GNU C Compiler
 
