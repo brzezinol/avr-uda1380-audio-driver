@@ -77,6 +77,11 @@
 #define SET_PINPORT_AS_OUT(ADDRES,PIN) (ADDRES |= (1<<PIN))
 #define SET_PINPORT_AS_IN(ADDRES,PIN) (ADDRES &= ~(1<<PIN))
 
+#define MIN(X,Y) ((X) < (Y) ? (X) : (Y))
+#define MAX(X,Y) ((X) > (Y) ? (X) : (Y))
+/* return number of elements in array a */
+#define ARRAYLEN(a) (sizeof(a)/sizeof((a)[0]))
+
 extern short* ByteToHexString(uint8_t b);
 
 #endif /* COMMON_H_ */
