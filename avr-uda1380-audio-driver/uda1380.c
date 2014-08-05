@@ -293,7 +293,7 @@ void audiohw_postinit(void)
     //sleep(HZ);
 	_delay_ms(50);
     /* Power on FSDAC and HP amp. */
-    audiohw_enable_output(true);
+    audiohw_enable_output(false);
 
     /* UDA1380: Unmute the master channel
        (DAC should be at zero point now). */
@@ -436,16 +436,24 @@ void audiohw_set_recvol(int left, int right, int type)
                 value_pga = (uda1380_regs[REG_PGA] & ~PGA_GAIN_MASK)
                                 | PGA_GAINL(left_ag) | PGA_GAINR(right_ag);
 
-                data[0] = REG_DEC_VOL;
-                data[1] = value_dec >> 8;
-                data[2] = value_dec & 0xff;
-                data[3] = value_pga >> 8;
-                data[4] = value_pga & 0xff;
+                //data[0] = REG_DEC_VOL;
+                //data[1] = value_dec >> 8;
+                //data[2] = value_dec & 0xff;
+                //data[3] = value_pga >> 8;
+                //data[4] = value_pga & 0xff;
+				
+				i2c_data4_t packet;
+				packet.addr = UDA1380_ADDR; //adres uda
+				packet.reg = REG_DEC_VOL; //adres rejestru
+				packet.datah = value_dec >> 8;
+				packet.datal = value_dec & 0xff;
+				packet.data2h = value_pga >> 8;
+				packet.data2l = value_pga & 0xff;
 
-///TODO:Po przypiêciu biblioteki i2c przerobic poni¿szy kod
                 //if (i2c_write(I2C_IFACE_0, UDA1380_ADDR, data, 5) != 5)
-				if(i2c_write(data, sizeof data) != I2C_OK)
+				if(i2c_write(&packet, sizeof(packet)) != I2C_OK)
                 {
+					USART_Log("uda1380 error reg=combi rec gain\r");
 	                //DEBUGF("uda1380 error reg=combi rec gain");
                 }
                 else
