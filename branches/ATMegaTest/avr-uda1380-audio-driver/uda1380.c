@@ -72,7 +72,7 @@ int tenthdb2mixer(int db)
 /* Local functions and variables */
 /* ------------------------------------------------- */
 
-static int uda1380_write_reg(unsigned char reg, unsigned short value);
+//static extern int uda1380_write_reg(unsigned char reg, unsigned short value);
 unsigned short uda1380_regs[0x30];
 short recgain_mic;
 short recgain_line;
@@ -80,9 +80,10 @@ short recgain_line;
 /* Definition of a playback configuration to start with */
 #define NUM_DEFAULT_REGS 13
 unsigned short uda1380_defaults[2*NUM_DEFAULT_REGS] = {
-	REG_0,          EN_ADC | EN_DEC | ADC_CLK | SYSCLK_256FS,
+	/* IIS conf register master mode, iis def format */
 	REG_I2S,        I2S_MODE_MASTER | I2S_OFMT_IIS,
-	REG_PWR,        PON_PLL | PON_BIAS,
+	/* Power-on BIAS for ADC, AVC, FSDAC  */
+	REG_PWR,        PON_BIAS,
 	/* PON_HP & PON_DAC is enabled later */
 	REG_AMIX,       AMIX_RIGHT(0x3f) | AMIX_LEFT(0x3f),
 	/* 00=max, 3f=mute */
@@ -90,18 +91,18 @@ unsigned short uda1380_defaults[2*NUM_DEFAULT_REGS] = {
 	/* 00=max, ff=mute */
 	REG_MIX_VOL,    MIX_VOL_CH_1(0) | MIX_VOL_CH_2(0xff),
 	/* 00=max, ff=mute */
-	REG_EQ,         EQ_MODE_MAX,
+	REG_EQ,         EQ_MODE_FLAT,
 	/* Bass and treble = 0 dB */
-	REG_MUTE,       MUTE_MASTER | MUTE_CH2,
+	REG_MUTE,       MUTE_MASTER | MUTE_CH1 | MUTE_CH2 | DE_EMPHASIS_44kHz, // tu sprawdziæ czy potem w³¹czaj¹c recording mute s¹ wy¹³czane
 	/* Mute everything to start with */
 	REG_MIX_CTL,    MIX_CTL_MIX,
 	/* Enable mixer */
 	REG_DEC_VOL,    0,
 	REG_PGA,        MUTE_ADC,
 	REG_ADC,        SKIP_DCFIL,
-	REG_AGC,        0
+	REG_AGC,        0,
+	REG_0,          EN_ADC | EN_DEC | ADC_CLK | SYSCLK_256FS
 };
-
 
 /* Returns 0 if register was written or -1 if write failed */
 static int uda1380_write_reg(unsigned char reg, unsigned short value)
@@ -495,4 +496,8 @@ void audiohw_set_monitor(bool enable)
         uda1380_write_reg(REG_MUTE, uda1380_regs[REG_MUTE] & ~MUTE_CH2);
     else           /* mute channel 2 */
         uda1380_write_reg(REG_MUTE, uda1380_regs[REG_MUTE] | MUTE_CH2);
+}
+
+void audiohw_write_reg(unsigned char reg, unsigned short v){
+	uda1380_write_reg(reg, v);
 }

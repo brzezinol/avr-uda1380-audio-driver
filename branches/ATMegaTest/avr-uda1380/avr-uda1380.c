@@ -43,29 +43,16 @@ int main(void)
 	DDRC = ((1<<SDA_PIN)|(1<<SCL_PIN)); 
 	PORTC = ((1<<SDA_PIN)|(1<<SCL_PIN)); 
 	_delay_ms(500);
-	//USART_Init();
-	//USART_Log("Init i2c\r");
-	//i2c_init_(0x45);                        //- F_TWI=100KHz
+	USART_Init();
+	USART_Log("Init i2c\r");
 	SoftI2CInit();	
-
-	
-	
-	//audiohw_set_regs();
 	
     while(1)
     {
-		inituda();
+		//wywo³anie wysy³a wartoœæ na rejestr REG_0
+		audiohw_write_reg(0x00, 0x01);
 		for(int i = 0; i < 10;i++){
-				_delay_ms(500);
+			_delay_ms(500);
 		}
-		//_delay_ms(500);
-		//uint8_t cmd = 0;
-		//cmd = USART_ReceiveByte();
-		//if(cmd != 0)
-		//{
-			//USART_Log("Byte recv\r");
-			//USART_SendByte(cmd);
-		//}
-			
     }
 }
