@@ -54,8 +54,8 @@ extern void audiohw_set_frequency(unsigned fsel);
 #define EN_DEC              (1 << 10)    /* Enable Decimator               */
 #define EN_DAC              (1 << 9)     /* Enable DAC                     */
 #define EN_INT              (1 << 8)     /* Enable Interpolator            */
-#define ADC_CLK             (1 << 5)     /* ADC_CLK: WSPLL (1) SYSCLK (0)  */
-#define DAC_CLK             (1 << 4)     /* DAC_CLK: WSPLL (1) SYSCLK (0)  */
+#define ADC_CLK             (0 << 5)     /* ADC_CLK: WSPLL (1) SYSCLK (0)  */
+#define DAC_CLK             (0 << 4)     /* DAC_CLK: WSPLL (1) SYSCLK (0)  */
 
 /* SYSCLK freqency select */
 #define SYSCLK_256FS        (0 << 2)
