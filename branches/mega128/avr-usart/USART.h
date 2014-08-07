@@ -24,8 +24,25 @@
   #define USBS USBS0
   #define UCSZ0 UCSZ00
   #define RXC RXC0
+#elif defined (_AVR_ATMEGA128A_H_INCLUDED)
+  #define UBRRL UBRR0L
+  #define UBRRH UBRR0H
+  #define UCSRA UCSR0A
+  #define UCSRB UCSR0B
+  #define UCSRC UCSR0C
+  #define UDRE UDRE0
+  #define UDR UDR0
+  #define RXCIE RXCIE0
+  #define RXEN RXEN0
+  #define TXEN TXEN0
+  #define USBS USBS0
+  #define UCSZ0 UCSZ00
+  #define RXC RXC0
 #endif
 
+#ifndef UDRE
+#error No UART def
+#endif
 
 #ifndef USART_BAUDRATE
 #define USART_BAUDRATE 19200
