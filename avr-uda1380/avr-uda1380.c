@@ -38,19 +38,32 @@ void inituda(){
 	
 int main(void)
 {
-	DDRC = ((1<<SDA_PIN)|(1<<SCL_PIN)); 
-	PORTC = ((1<<SDA_PIN)|(1<<SCL_PIN)); 
+	/*
+		Aliasy s¹ zdefiniowane w avr-common.h
+		IIC_PORT to w zale¿noœci o procesora PORTD, PORTC etc.
+		IIC_DDR to w zale¿noœci od procesora DDRD, DDRC etc.
+		SDA_PIN i SCL_PIN te¿ s¹ zdefiniowane jak powy¿sze
+	*/
+	
+	IIC_PORT = ((1<<SDA_PIN)|(1<<SCL_PIN)); 
+	IIC_DDR = ((1<<SDA_PIN)|(1<<SCL_PIN)); 
+	//opóŸnienie 500ms
 	_delay_ms(500);
+	//inicjalizacja USART
 	USART_Init();
+	//Log tekstowy
 	USART_Log("Init i2c\r");
+	//init TWI
 	i2c_init_(0x45);                        //- F_TWI=100KHz
 	
+	//opóŸnienie 1s to do przetestowania jeszcze.
 	for(int i=0;i<2;i++){
 		_delay_ms(500);
 	}
 	
     while(1)
     {
+		//init uda w petli co 5s
 		inituda();
 		for(int i=0;i<20;i++){
 			_delay_ms(500);

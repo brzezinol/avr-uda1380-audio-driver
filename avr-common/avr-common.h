@@ -10,11 +10,20 @@
 #define COMMON_H_
 
 #if defined (_AVR_IOM328P_H_)
+#define IIC_PORT PORTC
+#define IIC_DDR DDRC 
 #define SDA_PIN 0x04 //port C  pins 4,5 as out
 #define SCL_PIN 0x05
 #elif defined (_AVR_IOM32_H_)
+#define IIC_PORT PORTC
+#define IIC_DDR DDRC
 #define SDA_PIN 0x00
 #define SCL_PIN 0x01
+#elif defined (_AVR_ATMEGA128A_H_INCLUDED)
+#define IIC_PORT PORTD
+#define IIC_DDR DDRD
+#define SDA_PIN 0x01
+#define SCL_PIN 0x00
 #endif
 
 //master define cpu oscilator
