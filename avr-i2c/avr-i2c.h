@@ -57,10 +57,10 @@
 /// Holds the status of the I2C state machine.
 enum I2C_STATUS_ENUM
 {
-    I2C_OK,               ///< Transaction completed succesfully
-	I2C_NOACK,			  ///< Transaction failed no ACK
-    I2C_ERROR,            ///< Transaction failed
-    I2C_BUSY,             ///< Transaction in progress
+    I2C_OK = 0x00,               ///< Transaction completed succesfully
+	I2C_NOACK = 0x01,			  ///< Transaction failed no ACK
+    I2C_ERROR = 0x02,            ///< Transaction failed
+    I2C_BUSY = 0x03,             ///< Transaction in progress
     I2C_TIMEOUT  = 0x04,  ///< Transaction failed
     I2C_LOST_ARB = 0x08,  ///< Transaction failed
     I2C_NO_RBUF  = 0x10,  ///< I2cRxBuff not initalized 

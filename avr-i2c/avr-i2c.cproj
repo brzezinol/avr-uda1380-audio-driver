@@ -111,12 +111,6 @@
     <Compile Include="avr_i2c_hw.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="avr_soft_i2c.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="avr_soft_i2c.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="i2c_dev_search.c">
       <SubType>compile</SubType>
     </Compile>
