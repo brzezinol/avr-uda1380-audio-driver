@@ -31,7 +31,7 @@ void inituda(){
 	USART_Log("Set monitor\r");
 	audiohw_set_monitor(true);
 	USART_Log("Enable rec\r");
-	audiohw_enable_recording(true);
+	audiohw_enable_recording(false);
 	USART_Log("Mute false\r");
 	audiohw_mute(false);
 }
@@ -45,18 +45,15 @@ int main(void)
 	USART_Log("Init i2c\r");
 	i2c_init_(0x45);                        //- F_TWI=100KHz
 	
-	inituda();
+	for(int i=0;i<2;i++){
+		_delay_ms(500);
+	}
 	
     while(1)
     {
-		//_delay_ms(500);
-		//uint8_t cmd = 0;
-		//cmd = USART_ReceiveByte();
-		//if(cmd != 0)
-		//{
-			//USART_Log("Byte recv\r");
-			//USART_SendByte(cmd);
-		//}
-			
+		inituda();
+		for(int i=0;i<20;i++){
+			_delay_ms(500);
+		}
     }
 }
