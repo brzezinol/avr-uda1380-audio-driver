@@ -19,7 +19,7 @@
 
 //master define cpu oscilator
 #ifndef F_CPU
-  #define F_CPU 16000000UL
+  #define F_CPU 11289600UL
 #endif
 
 //master twi speed definition
@@ -83,5 +83,5 @@
 #define ARRAYLEN(a) (sizeof(a)/sizeof((a)[0]))
 
 extern short* ByteToHexString(uint8_t b);
-
+extern void _wait_s(char ile);
 #endif /* COMMON_H_ */

@@ -80,8 +80,8 @@ short recgain_line;
 /* Definition of a playback configuration to start with */
 #define NUM_DEFAULT_REGS 13
 unsigned short uda1380_defaults[2*NUM_DEFAULT_REGS] = {
-	REG_0,          EN_DAC | EN_ADC | EN_INT | EN_DEC | ADC_CLK | DAC_CLK | SYSCLK_512FS | WSPLL_25_50,
-	REG_I2S,        I2S_IFMT_IIS,
+	REG_0,          EN_DAC | EN_ADC | EN_INT | EN_DEC | ADC_CLK | DAC_CLK | SYSCLK_256FS | WSPLL_25_50,
+	REG_I2S,        I2S_IFMT_IIS | I2S_OFMT_IIS,
 	REG_PWR,        PON_PLL | PON_BIAS,
 	/* PON_HP & PON_DAC is enabled later */
 	REG_AMIX,       AMIX_RIGHT(0x3f) | AMIX_LEFT(0x3f),
@@ -351,7 +351,7 @@ void audiohw_enable_recording(bool source_mic)
     }
 
     //sleep(HZ/8);
-	_delay_ms(25);
+	_delay_ms(5);
     uda1380_write_reg(REG_I2S,     uda1380_regs[REG_I2S] | I2S_MODE_MASTER);
     uda1380_write_reg(REG_MIX_CTL, MIX_MODE(1)); 
 }
@@ -491,4 +491,30 @@ void audiohw_set_monitor(bool enable)
         uda1380_write_reg(REG_MUTE, uda1380_regs[REG_MUTE] & ~MUTE_CH2);
     else           /* mute channel 2 */
         uda1380_write_reg(REG_MUTE, uda1380_regs[REG_MUTE] | MUTE_CH2);
+}
+
+
+void demo(){
+	_wait_s(5);
+	USART_Log("EQ_MODE_MIN\r");
+	uda1380_write_reg(REG_EQ, EQ_MODE_MIN);
+	_wait_s(5);
+	USART_Log("EQ_MODE_FLAT\r");
+	uda1380_write_reg(REG_EQ, EQ_MODE_FLAT);
+	_wait_s(5);
+	USART_Log("EQ_MODE_MAX\r");
+	uda1380_write_reg(REG_EQ, EQ_MODE_MAX);
+	
+	_wait_s(5);
+	USART_Log("treble(0)\r");
+	audiohw_set_treble(0);
+	_wait_s(5);
+	USART_Log("treble(3)\r");
+	audiohw_set_treble(3);
+	_wait_s(5);
+	USART_Log("bass(0)\r");
+	audiohw_set_bass(0);
+	_wait_s(5);
+	USART_Log("bass(8)\r");
+	audiohw_set_bass(8);
 }
