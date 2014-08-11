@@ -49,7 +49,7 @@
 # endif
 #else
 #error CPU freq must be at least 16x of TWI freq
-#endif
+#endif 
 #endif //defined(F_TWI)
 /*~~~~END I2C Bit Rate Calculator~~~~*/
 

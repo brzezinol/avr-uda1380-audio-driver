@@ -280,6 +280,7 @@ void audiohw_set_channel(int val);
  */
 void audiohw_set_stereo_width(int val);
 
+void demo();
 #endif /* CONFIG_CODEC != SWCODEC */
 
 #endif /* _AUDIOHW_H_ */
