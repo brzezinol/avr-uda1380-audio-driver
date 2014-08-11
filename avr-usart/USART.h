@@ -28,7 +28,7 @@
 
 
 #ifndef USART_BAUDRATE
-#define USART_BAUDRATE 19200
+#define USART_BAUDRATE 2400
 #endif
 
 #define BAUD_PRESCALE (((F_CPU / (USART_BAUDRATE * 16UL))) - 1)
