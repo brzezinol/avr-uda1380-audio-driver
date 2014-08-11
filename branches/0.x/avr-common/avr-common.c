@@ -18,7 +18,7 @@ short* ByteToHexString(uint8_t b){
 
 void _wait_s(char ile)
 {
-	for(int i=0;i<(ile<<1);i++){
+	for(int i=0;i<ile;i++){
 		_delay_ms(1000);
 	}
 }
